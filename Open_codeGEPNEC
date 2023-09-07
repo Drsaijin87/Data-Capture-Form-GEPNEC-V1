@@ -1,0 +1,112 @@
+import tkinter as tk
+from tkinter import ttk
+
+def submit_data():
+    # Add code to handle the submitted data
+    pass
+
+root = tk.Tk()
+root.title("Data Capture Form")
+
+# Create labels and entry fields
+labels = [
+    "Primary Organ of Origin",
+    "Site of Metastases",
+    "Immunohistochemistry",
+    "Histology",
+    "Age",
+    "Sex",
+    "Ethnicity",
+    "Treatment",
+    "Time to Treatment Failure",
+    "Progression Free Survival",
+    "Overall Survival",
+]
+
+# Primary Organ of Origin dropdown
+primary_organ_options = [
+    "Oesophagus",
+    "Stomach",
+    "Small Intestine",
+    "Pancreas",
+    "Biliary System",
+    "Appendix",
+    "Ascending Colon",
+    "Tranverse Colon",
+    "Sigmoid Colon",
+    "Rectum",
+    "Anus",
+]
+
+# Site of Metastases dropdown
+site_metastases_options = [
+    "Lymph Node",
+    "Lung",
+    "Bone",
+    "Peritoneum Omentum",
+    "Brain",
+    "Other",
+]
+
+# Histology dropdown
+histology_options = [
+    "Small Cell",
+    "Large Cell",
+]
+
+# Sex dropdown
+sex_options = [
+    "Male",
+    "Female",
+]
+
+# Treatment checkboxes
+treatment_options = [
+    "Surgery",
+    "Systemic Anti Cancer Therapy",
+    "Other Treatment",
+]
+
+entries = []
+
+for i, label in enumerate(labels):
+    tk.Label(root, text=label).grid(row=i, column=0)
+    
+    if label == "Primary Organ of Origin":
+        primary_organ_var = tk.StringVar()
+        primary_organ_dropdown = ttk.Combobox(root, textvariable=primary_organ_var, values=primary_organ_options)
+        primary_organ_dropdown.grid(row=i, column=1)
+        entries.append(primary_organ_var)
+    elif label == "Site of Metastases":
+        site_metastases_var = tk.StringVar()
+        site_metastases_dropdown = ttk.Combobox(root, textvariable=site_metastases_var, values=site_metastases_options)
+        site_metastases_dropdown.grid(row=i, column=1)
+        entries.append(site_metastases_var)
+    elif label == "Histology":
+        histology_var = tk.StringVar()
+        histology_dropdown = ttk.Combobox(root, textvariable=histology_var, values=histology_options)
+        histology_dropdown.grid(row=i, column=1)
+        entries.append(histology_var)
+    elif label == "Sex":
+        sex_var = tk.StringVar()
+        sex_dropdown = ttk.Combobox(root, textvariable=sex_var, values=sex_options)
+        sex_dropdown.grid(row=i, column=1)
+        entries.append(sex_var)
+    elif label == "Treatment":
+        treatment_vars = []
+        for j, option in enumerate(treatment_options):
+            treatment_var = tk.BooleanVar()
+            treatment_checkbox = tk.Checkbutton(root, text=option, variable=treatment_var)
+            treatment_checkbox.grid(row=i, column=1+j)
+            treatment_vars.append(treatment_var)
+        entries.append(treatment_vars)
+    else:
+        entry = tk.Entry(root)
+        entry.grid(row=i, column=1)
+        entries.append(entry)
+
+# Create submit button
+submit_button = tk.Button(root, text="Submit", command=submit_data)
+submit_button.grid(row=len(labels), column=1)
+
+root.mainloop()
